@@ -23,9 +23,13 @@
 
 ## 界面预览
 
-| 形象馆 | 动作设置 | 伙伴互动 |
+| 形象馆首页 | 动作设置 | 伙伴互动 |
 |---|---|---|
-| <img src="docs/preview-01-home.jpg" width="240"/> | <img src="docs/preview-02-gestures.jpg" width="240"/> | <img src="docs/preview-03-partner.jpg" width="240"/> |
+| <img src="docs/p03-home.jpg" width="240"/> | <img src="docs/p04-gestures.jpg" width="240"/> | <img src="docs/p06-partner.jpg" width="240"/> |
+
+| 品牌引导 | 认识成员 | 形象介绍 |
+|---|---|---|
+| <img src="docs/p01-brand.jpg" width="240"/> | <img src="docs/p02-members.jpg" width="240"/> | <img src="docs/p05-profile.jpg" width="240"/> |
 
 ### 操作演示
 
