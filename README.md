@@ -6,6 +6,8 @@
 
 **Android 安装包下载仓库**
 
+> 🌐 在线展示页：**[https://liuyanmei069.github.io/oripet-desktop-pet/](https://liuyanmei069.github.io/oripet-desktop-pet/)**
+
 </div>
 
 ## 使用说明
