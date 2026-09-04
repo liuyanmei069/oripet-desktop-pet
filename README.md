@@ -21,6 +21,16 @@
 > 体验包包含全部内置 Q 版宠物与互动功能：触摸反馈、专属动作、桌面常驻。
 > 纯净无广告、无账号、无内购、无网络权限。
 
+## 界面预览
+
+| 形象馆 | 动作设置 | 伙伴互动 |
+|---|---|---|
+| <img src="docs/preview-01-home.jpg" width="240"/> | <img src="docs/preview-02-gestures.jpg" width="240"/> | <img src="docs/preview-03-partner.jpg" width="240"/> |
+
+### 操作演示
+
+<video src="docs/demo.mp4" controls width="320"></video>
+
 ## 常见问题
 
 - **宠物不显示？** 检查"显示在其他应用上层"权限是否开启，并回到 App 点击召唤。
