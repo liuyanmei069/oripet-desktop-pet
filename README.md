@@ -29,7 +29,9 @@
 
 ### 操作演示
 
-<video src="docs/demo.mp4" controls width="320"></video>
+<video src="docs/demo.mp4" controls="controls" muted="muted" style="max-height:560px;border-radius:8px;"></video>
+
+> 若上方无法播放，可点击 ▶️ [打开视频文件](docs/demo.mp4)（GitHub 文件页支持直接播放）
 
 ## 常见问题
 
