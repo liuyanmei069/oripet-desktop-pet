@@ -8,195 +8,252 @@
 <meta property="og:title" content="OriPet · 桌面宠物">
 <meta property="og:description" content="把喜欢的 Q 版偶像放到手机桌面 —— 常驻陪伴、触摸互动、可爱动作。Android 8.0+ 免费下载。">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 <style>
+  /* ===== QuestUI design tokens (designmd.ai/chef/questui) ===== */
   :root{
-    --bg:#0c1124; --bg2:#0e1530; --panel:#161e3c; --panel2:#1b2450;
-    --line:rgba(255,255,255,.09);
-    --txt:#f2f4ff; --sub:#a6aecd; --dim:#7c85ab;
-    --pink:#ff7eb3; --violet:#8b6cff; --cyan:#5fd4ff;
-    --grad:linear-gradient(135deg,#ff7eb3,#8b6cff 55%,#5fd4ff);
+    --gold:#CA8A04; --gold-hi:#DAA520; --gold-lo:#B8780A;
+    --red:#991B1B; --purple:#581C87;
+    --bg:#1A0F0A; --surface:#2C1A10; --surface2:#3D2517;
+    --line:#5C3D2E; --line-dim:#3D2517;
+    --paper:#F5E6D3; --paper-dim:#BFA98A; --paper-deep:#E7D5BC;
+    --ok:#22C55E;
+    /* gold glow elevation */
+    --sh-sm:0 1px 3px rgba(202,138,4,.15);
+    --sh:0 2px 8px rgba(202,138,4,.20);
+    --sh-md:0 4px 16px rgba(202,138,4,.25);
+    --sh-lg:0 8px 32px rgba(202,138,4,.30);
+    --glow:0 0 20px rgba(202,138,4,.40);
+    --rad-sm:2px; --rad:4px; --rad-md:6px; --rad-lg:8px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{
     background:
-      radial-gradient(1200px 500px at 85% -10%, rgba(139,108,255,.16), transparent 60%),
-      radial-gradient(900px 420px at -10% 8%, rgba(255,126,179,.12), transparent 55%),
-      linear-gradient(180deg,var(--bg),var(--bg2));
-    color:var(--txt);
-    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonicOS Sans SC","MiSans","Noto Sans SC","Microsoft YaHei",sans-serif;
-    line-height:1.65; -webkit-font-smoothing:antialiased;
+      radial-gradient(1100px 480px at 88% -8%, rgba(202,138,4,.10), transparent 60%),
+      radial-gradient(900px 520px at -12% 6%, rgba(88,28,135,.14), transparent 55%),
+      radial-gradient(1400px 900px at 50% 120%, rgba(153,27,27,.07), transparent 60%),
+      var(--bg);
+    color:var(--paper);
+    font-family:"Spectral","Noto Serif SC","Songti SC",serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
   }
-  a{color:var(--cyan);text-decoration:none}
+  a{color:var(--gold-hi);text-decoration:none}
   .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
-  section{padding:66px 0 10px}
-  h2{font-size:clamp(21px,3.4vw,30px);font-weight:800;letter-spacing:.5px}
-  h2 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .sub{color:var(--sub);font-size:15px;margin-top:8px}
+  section{padding:72px 0 8px}
+  .eyebrow{font-family:Cinzel,"Noto Serif SC",serif;font-size:12px;font-weight:700;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:18px}
+  .eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+  .eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.5}
+  h2{font-family:Cinzel,"Noto Serif SC",serif;font-weight:700;
+    font-size:clamp(22px,3.6vw,31px);letter-spacing:.08em;line-height:1.3}
+  h2 .hl{color:var(--gold-hi)}
+  .sub{color:var(--paper-dim);font-size:15.5px;margin-top:10px;font-family:Spectral,"Noto Serif SC",serif}
 
   /* header */
-  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);
-    background:rgba(12,17,36,.72);border-bottom:1px solid var(--line)}
-  .bar{display:flex;align-items:center;gap:10px;height:58px}
-  .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px}
-  .logo .dot{width:30px;height:30px;border-radius:9px;background:var(--grad);
-    display:grid;place-items:center;font-size:16px}
-  .bar nav{margin-left:auto;display:flex;gap:22px;font-size:14px;color:var(--sub)}
-  .bar nav a{color:var(--sub)} .bar nav a:hover{color:var(--txt)}
+  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);
+    background:rgba(26,15,10,.82);border-bottom:1px solid var(--line-dim)}
+  .bar{display:flex;align-items:center;gap:10px;height:60px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:Cinzel,"Noto Serif SC",serif;
+    font-weight:800;font-size:17px;letter-spacing:.14em;color:var(--paper)}
+  .logo .seal{width:32px;height:32px;border-radius:var(--rad-sm);display:grid;place-items:center;
+    background:linear-gradient(135deg,#B8780A,#DAA520);box-shadow:var(--sh-sm);
+    font-family:Cinzel,serif;font-weight:800;font-size:16px;color:#1A0F0A;
+    border:1px solid #EAC569}
+  .bar nav{margin-left:auto;display:flex;gap:26px}
+  .bar nav a{font-family:Cinzel,"Noto Serif SC",serif;font-size:13px;letter-spacing:.16em;
+    color:var(--paper-dim);position:relative;padding:4px 0}
+  .bar nav a:hover{color:var(--gold-hi)}
+  .bar nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
+    background:var(--gold);transition:right .3s}
+  .bar nav a:hover::after{right:0}
 
   /* hero */
-  .hero{text-align:center;padding:70px 0 8px}
-  .hero .tag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--pink);
-    border:1px solid rgba(255,126,179,.35);background:rgba(255,126,179,.08);
-    padding:5px 13px;border-radius:999px;margin-bottom:22px}
-  .hero h1{font-size:clamp(29px,6vw,50px);line-height:1.2;font-weight:900;letter-spacing:1px}
-  .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .hero p{color:var(--sub);font-size:clamp(14px,2.2vw,17px);margin:16px auto 0;max-width:620px}
-  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:30px 0 18px}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:16px;
-    padding:14px 26px;border-radius:14px;transition:.2s transform,.2s box-shadow}
-  .btn.primary{background:var(--grad);color:#fff;box-shadow:0 10px 28px rgba(139,108,255,.35)}
-  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(139,108,255,.45)}
-  .btn.ghost{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--txt)}
-  .btn.ghost:hover{background:rgba(255,255,255,.11)}
-  .badges{color:var(--dim);font-size:13px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-  .badges b{color:var(--sub);font-weight:600}
+  .hero{text-align:center;padding:84px 0 10px;position:relative}
+  .hero::before{content:"✦";position:absolute;left:50%;top:34px;transform:translateX(-50%);
+    color:var(--gold);opacity:.35;font-size:15px;letter-spacing:1em;text-indent:1em}
+  .hero .tag{display:inline-flex;align-items:center;gap:8px;font-family:Cinzel,"Noto Serif SC",serif;
+    font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-hi);
+    border:1px solid rgba(202,138,4,.45);background:rgba(202,138,4,.07);
+    padding:7px 18px;border-radius:var(--rad-sm);margin-bottom:26px;box-shadow:var(--sh-sm)}
+  .hero h1{font-family:Cinzel,"Noto Serif SC",serif;font-weight:800;
+    font-size:clamp(30px,6vw,50px);line-height:1.22;letter-spacing:.06em;
+    text-shadow:0 2px 18px rgba(202,138,4,.22)}
+  .hero h1 em{font-style:normal;color:var(--gold-hi)}
+  .hero p{color:var(--paper-dim);font-size:clamp(14.5px,2.2vw,17px);margin:20px auto 0;max-width:640px}
+  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:34px 0 20px}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:Cinzel,"Noto Serif SC",serif;
+    font-weight:700;font-size:15.5px;letter-spacing:.12em;
+    padding:13px 30px;border-radius:var(--rad);transition:.3s transform,.3s box-shadow,.3s background}
+  .btn.primary{background:linear-gradient(180deg,#DAA520,#B8780A);color:#1A0F0A;
+    border:1px solid #EAC569;box-shadow:var(--sh)}
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:var(--glow),var(--sh-md)}
+  .btn.secondary{background:rgba(202,138,4,.08);color:var(--gold-hi);
+    border:1px solid var(--gold);box-shadow:var(--sh-sm)}
+  .btn.secondary:hover{background:rgba(202,138,4,.16);box-shadow:var(--glow)}
+  .badges{color:var(--paper-dim);font-size:13px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .badges b{color:var(--paper-deep);font-weight:600;font-family:Spectral,"Noto Serif SC",serif}
 
   /* phone shots */
-  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px;
-    margin-top:44px;justify-items:center}
-  .phone{width:min(250px,74vw);border-radius:26px;border:1px solid var(--line);
-    background:rgba(255,255,255,.04);padding:9px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
-  .phone img{display:block;width:100%;border-radius:18px;background:#000}
-  .phone figcaption{text-align:center;font-size:13px;color:var(--sub);padding:10px 0 4px}
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:22px;
+    margin-top:46px;justify-items:center}
+  .phone{width:min(250px,74vw);border-radius:var(--rad-lg);position:relative;
+    border:1px solid var(--line);background:linear-gradient(180deg,#2C1A10,#241307);
+    padding:9px 9px 6px;box-shadow:var(--sh-md)}
+  .phone::before{content:"";position:absolute;top:0;left:12%;right:12%;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.9}
+  .phone img{display:block;width:100%;border-radius:var(--rad-md);border:1px solid #120a06}
+  .phone figcaption{text-align:center;font-family:Cinzel,"Noto Serif SC",serif;font-size:11px;
+    letter-spacing:.24em;color:var(--paper-dim);padding:10px 0 6px}
 
   /* features */
-  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:34px}
-  .card{background:linear-gradient(180deg,var(--panel),rgba(22,30,60,.5));
-    border:1px solid var(--line);border-radius:18px;padding:22px 20px}
-  .card .ic{width:44px;height:44px;border-radius:13px;background:rgba(139,108,255,.14);
-    display:grid;place-items:center;font-size:21px;margin-bottom:14px}
-  .card h3{font-size:16px;font-weight:700}
-  .card p{color:var(--sub);font-size:13.5px;margin-top:6px}
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-top:36px}
+  .card{background:linear-gradient(180deg,#2C1A10,#241307);border:1px solid var(--line);
+    border-top:2px solid rgba(202,138,4,.85);border-radius:var(--rad);padding:24px 20px;
+    box-shadow:var(--sh-sm);transition:.3s box-shadow,.3s transform}
+  .card:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+  .card .seal{width:46px;height:46px;border-radius:var(--rad-sm);display:grid;place-items:center;
+    font-family:Cinzel,"Noto Serif SC",serif;font-weight:700;font-size:19px;color:var(--gold-hi);
+    border:1px solid rgba(202,138,4,.5);background:rgba(202,138,4,.08);margin-bottom:16px}
+  .card h3{font-family:Cinzel,"Noto Serif SC",serif;font-size:16.5px;font-weight:700;letter-spacing:.1em}
+  .card p{color:var(--paper-dim);font-size:14px;margin-top:8px;font-family:Spectral,"Noto Serif SC",serif}
 
   /* howto */
-  .steps{margin-top:34px;display:grid;gap:14px}
-  .step{display:flex;gap:16px;background:rgba(255,255,255,.03);border:1px solid var(--line);
-    border-radius:16px;padding:16px 18px;align-items:flex-start}
-  .step .n{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--grad);
-    display:grid;place-items:center;font-weight:800;font-size:14px;margin-top:2px}
-  .step b{font-size:15px}
-  .step p{color:var(--sub);font-size:13.5px;margin-top:3px}
+  .steps{margin-top:36px;display:grid;gap:14px}
+  .step{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(180deg,#2C1A10,#241307);
+    border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:var(--rad);
+    padding:18px 20px;box-shadow:var(--sh-sm)}
+  .step .n{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    font-family:Cinzel,serif;font-weight:700;font-size:13px;color:#1A0F0A;
+    background:radial-gradient(circle at 35% 30%,#EAC569,#B8780A);box-shadow:var(--sh-sm);
+    border:1px solid #EAC569;margin-top:3px;letter-spacing:.05em}
+  .step b{font-family:Cinzel,"Noto Serif SC",serif;font-size:15.5px;font-weight:700;letter-spacing:.05em}
+  .step p{color:var(--paper-dim);font-size:14px;margin-top:4px}
 
   /* video */
-  .vidwrap{margin-top:34px;border-radius:20px;overflow:hidden;border:1px solid var(--line);
-    background:#000;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+  .vidwrap{margin-top:36px;border-radius:var(--rad-md);overflow:hidden;background:#000;
+    border:1px solid var(--line);box-shadow:var(--sh-md);position:relative}
+  .vidwrap::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2}
   video{display:block;width:100%;max-height:620px}
 
   /* faq */
-  details{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;
-    padding:15px 18px;margin-top:12px}
-  summary{cursor:pointer;font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
-  summary::after{content:"+";color:var(--dim);font-size:20px;font-weight:400}
+  details{background:linear-gradient(180deg,#2C1A10,#241307);border:1px solid var(--line);
+    border-radius:var(--rad);padding:16px 20px;margin-top:12px;box-shadow:var(--sh-sm)}
+  details[open]{box-shadow:var(--sh)}
+  summary{cursor:pointer;font-family:Cinzel,"Noto Serif SC",serif;font-weight:700;font-size:15px;
+    letter-spacing:.06em;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  summary::after{content:"+";color:var(--gold-hi);font-family:Cinzel,serif;font-size:19px;font-weight:600}
   details[open] summary::after{content:"–"}
-  details p{color:var(--sub);font-size:14px;margin-top:10px}
+  details p{color:var(--paper-dim);font-size:14px;margin-top:10px}
 
-  footer{border-top:1px solid var(--line);margin-top:80px;padding:26px 0 40px;text-align:center;
-    color:var(--dim);font-size:13px}
-  footer .links{display:flex;gap:20px;justify-content:center;margin-bottom:12px;font-size:14px}
-  @media (max-width:600px){ section{padding:52px 0 0} .bar nav{display:none} }
+  footer{border-top:1px solid var(--line-dim);margin-top:84px;padding:30px 0 44px;text-align:center;
+    color:var(--paper-dim);font-size:13px;position:relative}
+  footer::before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+    width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  footer .links{display:flex;gap:22px;justify-content:center;margin-bottom:14px;font-size:13.5px;
+    font-family:Cinzel,"Noto Serif SC",serif;letter-spacing:.12em}
+  .kicker{font-family:Cinzel,serif;color:var(--gold);letter-spacing:.4em;text-transform:uppercase;
+    font-size:11px;margin-bottom:6px}
+  @media (max-width:600px){ section{padding:56px 0 0} .bar nav{display:none} }
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap bar">
-    <div class="logo"><span class="dot">🐾</span> OriPet 桌面宠物</div>
+    <div class="logo"><span class="seal">O</span> OriPet</div>
     <nav>
-      <a href="#preview">界面预览</a>
+      <a href="#preview">界面</a>
       <a href="#feat">特色</a>
-      <a href="#howto">使用说明</a>
-      <a href="#faq">常见问题</a>
+      <a href="#howto">指引</a>
+      <a href="#faq">问答</a>
     </nav>
   </div>
 </header>
 
 <div class="hero wrap">
-  <div class="tag">✦ Android 悬浮窗桌面宠物 · v1.0.0 正式发布</div>
+  <div class="tag">✦ Android 桌面宠物 · v1.0.0</div>
   <h1>把喜欢的 <em>Q 版偶像</em><br>放到手机桌面</h1>
   <p>OriPet 让她们常驻在你的屏幕上层 —— 轻触有反馈、专属小动作、伙伴之间还会互动陪伴。打开其他应用时，她就在旁边陪你。</p>
   <div class="cta">
-    <a class="btn primary" href="dist/oripet-public-demo-v1.0.0.apk" download>📦 下载 APK · v1.0.0</a>
-    <a class="btn ghost" href="#demo">▶ 看操作演示</a>
+    <a class="btn primary" href="dist/oripet-public-demo-v1.0.0.apk" download>下载 APK · v1.0.0</a>
+    <a class="btn secondary" href="#demo">观看演示</a>
   </div>
   <div class="badges">
-    <span><b>约 15 MB</b></span><span><b>Android 8.0+</b></span><span><b>免费 · 无广告</b></span><span><b>无需注册</b></span>
+    <span>约 <b>15 MB</b></span><span><b>Android 8.0+</b></span><span>免费 · <b>无广告</b></span><span>无需 <b>注册</b></span>
   </div>
 </div>
 
 <section id="preview" class="wrap">
+  <div class="eyebrow">第一章 · The Stage</div>
   <h2>她就这样 <span class="hl">陪着你</span></h2>
   <div class="sub">悬浮在任意应用上层：点一点、摸一摸、看她撒娇跳舞；也可以随时下桌休息。</div>
   <div class="shots">
     <figure class="phone">
       <img src="docs/p01-brand.jpg" alt="OriPet 品牌引导页" loading="lazy">
-      <figcaption>欢迎页 · 把舞台搬到桌面</figcaption>
+      <figcaption>开场 · 欢迎页</figcaption>
     </figure>
     <figure class="phone">
       <img src="docs/p02-members.jpg" alt="OriPet 成员认识页" loading="lazy">
-      <figcaption>认识每一位成员</figcaption>
+      <figcaption>相识 · 成员图鉴</figcaption>
     </figure>
     <figure class="phone">
       <img src="docs/p03-home.jpg" alt="OriPet 形象馆首页" loading="lazy">
-      <figcaption>形象馆 · 召唤上桌</figcaption>
+      <figcaption>同行 · 召唤上桌</figcaption>
     </figure>
     <figure class="phone">
       <img src="docs/p04-gestures.jpg" alt="OriPet 手势动作设置" loading="lazy">
-      <figcaption>手势与专属动作</figcaption>
+      <figcaption>契约 · 手势动作</figcaption>
     </figure>
     <figure class="phone">
       <img src="docs/p05-profile.jpg" alt="OriPet 形象介绍资料页" loading="lazy">
-      <figcaption>形象介绍 · 查看资料</figcaption>
+      <figcaption>图鉴 · 形象介绍</figcaption>
     </figure>
     <figure class="phone">
       <img src="docs/p06-partner.jpg" alt="OriPet 伙伴互动页" loading="lazy">
-      <figcaption>伙伴互动 · 一起上桌</figcaption>
+      <figcaption>羁绊 · 伙伴互动</figcaption>
     </figure>
   </div>
 </section>
 
 <section id="feat" class="wrap">
-  <h2>为什么是 <span class="hl">OriPet</span></h2>
+  <div class="eyebrow">第二章 · The Power</div>
+  <h2>为何选择 <span class="hl">OriPet</span></h2>
   <div class="feat">
-    <div class="card"><div class="ic">✨</div><h3>真·悬浮桌面</h3><p>开启悬浮窗权限后常驻屏幕上层，看视频、聊天、刷资讯时她都在旁边。</p></div>
-    <div class="card"><div class="ic">👆</div><h3>触摸互动</h3><p>单击、双击、长按各有反应，还会自己发呆、散步、偷偷看你。</p></div>
-    <div class="card"><div class="ic">💃</div><h3>专属动作</h3><p>每位角色都有定制动作与性格：撒娇、跳舞、转圈圈，随你调教。</p></div>
-    <div class="card"><div class="ic">💞</div><h3>伙伴联动</h3><p>绑定一位成员，两人结伴上桌，在线时头像亮起、彼此互动。</p></div>
-    <div class="card"><div class="ic">🛡️</div><h3>干净省心</h3><p>无广告、无账号、无内购，卸载即走，不留后台残留。</p></div>
+    <div class="card"><div class="seal">浮</div><h3>真·悬浮桌面</h3><p>开启悬浮窗权限后常驻屏幕上层，看视频、聊天、刷资讯时她都在旁边。</p></div>
+    <div class="card"><div class="seal">触</div><h3>触摸互动</h3><p>单击、双击、长按各有反应，还会自己发呆、散步、偷偷看你。</p></div>
+    <div class="card"><div class="seal">舞</div><h3>专属动作</h3><p>每位角色都有定制动作与性格：撒娇、跳舞、转圈圈，随你调教。</p></div>
+    <div class="card"><div class="seal">伴</div><h3>伙伴联动</h3><p>绑定一位成员，两人结伴上桌，在线时头像亮起、彼此互动。</p></div>
+    <div class="card"><div class="seal">净</div><h3>干净省心</h3><p>无广告、无账号、无内购，卸载即走，不留后台残留。</p></div>
   </div>
 </section>
 
 <section id="demo" class="wrap">
-  <h2>30 秒看懂 <span class="hl">怎么玩</span></h2>
+  <div class="eyebrow">第三章 · The Ritual</div>
+  <h2>三十秒 <span class="hl">看明白</span></h2>
   <div class="vidwrap">
-    <video src="docs/demo.mp4" controls playsinline preload="metadata"
-      poster="docs/p03-home.jpg"></video>
+    <video src="docs/demo.mp4" controls playsinline preload="metadata" poster="docs/p03-home.jpg"></video>
   </div>
 </section>
 
 <section id="howto" class="wrap">
+  <div class="eyebrow">第四章 · The Summon</div>
   <h2>三步 <span class="hl">召唤上桌</span></h2>
   <div class="steps">
-    <div class="step"><div class="n">1</div>
+    <div class="step"><div class="n">I</div>
       <div><b>下载并安装</b><p>点上方按钮下载 APK，首次安装需允许「安装未知来源应用」。</p></div></div>
-    <div class="step"><div class="n">2</div>
+    <div class="step"><div class="n">II</div>
       <div><b>开启悬浮窗权限</b><p>打开 App 按引导操作：系统设置 → 应用 → OriPet → 「显示在其他应用上层」→ 允许。</p></div></div>
-    <div class="step"><div class="n">3</div>
+    <div class="step"><div class="n">III</div>
       <div><b>召唤宠物</b><p>回到 App 点「开始使用」或首页开关，选一位喜欢的角色，她就会飘到你的桌面。</p></div></div>
   </div>
 </section>
 
 <section id="faq" class="wrap">
+  <div class="eyebrow">终章 · The Lore</div>
   <h2>常见 <span class="hl">问题</span></h2>
   <details>
     <summary>宠物怎么不显示？</summary>
@@ -217,13 +274,14 @@
 </section>
 
 <footer>
+  <div class="kicker">✦ OriPet ✦</div>
   <div class="links">
-    <span>🐾 OriPet</span>
+    <span>OriPet</span>
     <a href="README.md">仓库说明</a>
     <a href="LICENSE">开源许可</a>
   </div>
   © 2026 OriPet · 演示素材为虚拟形象，请勿商用或外传<br>
-  本展示页由 GitHub Pages 托管
+  本展示页由 GitHub Pages 托管 · QuestUI 风格
 </footer>
 
 </body>
