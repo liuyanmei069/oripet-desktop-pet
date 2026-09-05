@@ -41,8 +41,11 @@
     line-height:1.7; -webkit-font-smoothing:antialiased;
   }
   a{color:var(--gold-hi);text-decoration:none}
-  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
-  section{padding:72px 0 8px}
+  .wrap{max-width:1060px;margin:0 auto;padding-inline:22px}
+  /* vertical rhythm: uniform section spacing (class specificity must not override) */
+  section{padding-top:clamp(64px,9vw,96px)}
+  .shots,.feat,.steps,.vidwrap{margin-top:46px}
+  #faq>details:first-of-type{margin-top:46px}
   .eyebrow{font-family:Cinzel,"Noto Serif SC",serif;font-size:12px;font-weight:700;letter-spacing:.34em;
     text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:18px}
   .eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
@@ -97,8 +100,8 @@
   .badges b{color:var(--paper-deep);font-weight:600;font-family:Spectral,"Noto Serif SC",serif}
 
   /* phone shots */
-  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:22px;
-    margin-top:46px;justify-items:center}
+  .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:28px;
+    justify-items:center}
   .phone{width:min(250px,74vw);border-radius:var(--rad-lg);position:relative;
     border:1px solid var(--line);background:linear-gradient(180deg,#2C1A10,#241307);
     padding:9px 9px 6px;box-shadow:var(--sh-md)}
@@ -109,7 +112,7 @@
     letter-spacing:.24em;color:var(--paper-dim);padding:10px 0 6px}
 
   /* features */
-  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin-top:36px}
+  .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
   .card{background:linear-gradient(180deg,#2C1A10,#241307);border:1px solid var(--line);
     border-top:2px solid rgba(202,138,4,.85);border-radius:var(--rad);padding:24px 20px;
     box-shadow:var(--sh-sm);transition:.3s box-shadow,.3s transform}
@@ -121,7 +124,7 @@
   .card p{color:var(--paper-dim);font-size:14px;margin-top:8px;font-family:Spectral,"Noto Serif SC",serif}
 
   /* howto */
-  .steps{margin-top:36px;display:grid;gap:14px}
+  .steps{display:grid;gap:14px}
   .step{display:flex;gap:18px;align-items:flex-start;background:linear-gradient(180deg,#2C1A10,#241307);
     border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:var(--rad);
     padding:18px 20px;box-shadow:var(--sh-sm)}
@@ -133,7 +136,7 @@
   .step p{color:var(--paper-dim);font-size:14px;margin-top:4px}
 
   /* video */
-  .vidwrap{margin-top:36px;border-radius:var(--rad-md);overflow:hidden;background:#000;
+  .vidwrap{border-radius:var(--rad-md);overflow:hidden;background:#000;
     border:1px solid var(--line);box-shadow:var(--sh-md);position:relative}
   .vidwrap::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
     background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2}
@@ -149,7 +152,7 @@
   details[open] summary::after{content:"–"}
   details p{color:var(--paper-dim);font-size:14px;margin-top:10px}
 
-  footer{border-top:1px solid var(--line-dim);margin-top:84px;padding:30px 0 44px;text-align:center;
+  footer{border-top:1px solid var(--line-dim);margin-top:clamp(64px,9vw,92px);padding:34px 0 46px;text-align:center;
     color:var(--paper-dim);font-size:13px;position:relative}
   footer::before{content:"";position:absolute;top:-1px;left:50%;transform:translateX(-50%);
     width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
@@ -157,7 +160,7 @@
     font-family:Cinzel,"Noto Serif SC",serif;letter-spacing:.12em}
   .kicker{font-family:Cinzel,serif;color:var(--gold);letter-spacing:.4em;text-transform:uppercase;
     font-size:11px;margin-bottom:6px}
-  @media (max-width:600px){ section{padding:56px 0 0} .bar nav{display:none} }
+  @media (max-width:600px){ section{padding-top:clamp(52px,10vw,64px)} .bar nav{display:none} }
 </style>
 </head>
 <body>
@@ -227,6 +230,7 @@
     <div class="card"><div class="seal">触</div><h3>触摸互动</h3><p>单击、双击、长按各有反应，还会自己发呆、散步、偷偷看你。</p></div>
     <div class="card"><div class="seal">舞</div><h3>专属动作</h3><p>每位角色都有定制动作与性格：撒娇、跳舞、转圈圈，随你调教。</p></div>
     <div class="card"><div class="seal">伴</div><h3>伙伴联动</h3><p>绑定一位成员，两人结伴上桌，在线时头像亮起、彼此互动。</p></div>
+    <div class="card"><div class="seal">记</div><h3>状态记忆</h3><p>关掉再开，她还记得你上次选的角色与状态，自动回到桌面。</p></div>
     <div class="card"><div class="seal">净</div><h3>干净省心</h3><p>无广告、无账号、无内购，卸载即走，不留后台残留。</p></div>
   </div>
 </section>
