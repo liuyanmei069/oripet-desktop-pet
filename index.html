@@ -73,6 +73,10 @@
   .bar nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;
     background:var(--gold);transition:right .3s}
   .bar nav a:hover::after{right:0}
+  .thm{margin-left:22px;flex:0 0 auto;cursor:pointer;font-family:Cinzel,"Noto Serif SC",serif;
+    font-size:12px;letter-spacing:.1em;color:var(--gold-hi);background:rgba(202,138,4,.08);
+    border:1px solid rgba(202,138,4,.5);border-radius:var(--rad-sm);padding:5px 12px;transition:.3s}
+  .thm:hover{background:rgba(202,138,4,.18)}
 
   /* hero */
   .hero{text-align:center;padding:84px 0 10px;position:relative}
@@ -137,10 +141,11 @@
 
   /* video */
   .vidwrap{border-radius:var(--rad-md);overflow:hidden;background:#000;
-    border:1px solid var(--line);box-shadow:var(--sh-md);position:relative}
+    border:1px solid var(--line);box-shadow:var(--sh-md);position:relative;
+    display:flex;justify-content:center;align-items:center}
   .vidwrap::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;
     background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2}
-  video{display:block;width:100%;max-height:620px}
+  video{display:block;width:auto;max-width:100%;height:min(68vh,640px);background:#000}
 
   /* faq */
   details{background:linear-gradient(180deg,#2C1A10,#241307);border:1px solid var(--line);
@@ -174,6 +179,39 @@
     .dlbar.show{opacity:1;transform:none;pointer-events:auto}
   }
   @media (max-width:600px){ section{padding-top:clamp(52px,10vw,64px)} .bar nav{display:none} }
+
+  /* ===== Light parchment preset (QuestUI adapted) ===== */
+  html[data-theme="light"]{
+    --gold-hi:#8C5E00;
+    --bg:#F7EFDE; --surface:#FFFBF1; --surface2:#F2E5CB;
+    --line:#DCC49A; --line-dim:#E7D6B4;
+    --paper:#3B2A17; --paper-dim:#7C6442; --paper-deep:#57401F;
+    --sh-sm:0 1px 3px rgba(160,110,20,.14);
+    --sh:0 2px 10px rgba(160,110,20,.16);
+    --sh-md:0 6px 22px rgba(160,110,20,.18);
+    --sh-lg:0 10px 34px rgba(160,110,20,.20);
+    --glow:0 0 18px rgba(202,138,4,.30)
+  }
+  html[data-theme="light"] body{
+    background:
+      radial-gradient(1000px 460px at 90% -8%, rgba(202,138,4,.14), transparent 60%),
+      radial-gradient(880px 520px at -10% 6%, rgba(190,140,220,.18), transparent 55%),
+      radial-gradient(1300px 820px at 50% 120%, rgba(210,120,120,.08), transparent 60%),
+      var(--bg);
+    color:var(--paper)
+  }
+  html[data-theme="light"] header{background:rgba(247,239,222,.86)}
+  html[data-theme="light"] .hero .tag{background:rgba(202,138,4,.13);border-color:rgba(170,110,10,.55)}
+  html[data-theme="light"] .phone,html[data-theme="light"] .card,html[data-theme="light"] .step,
+  html[data-theme="light"] details{
+    background:linear-gradient(180deg,#FFFBF1,#F3E7CE);border-color:var(--line)
+  }
+  html[data-theme="light"] .phone img{border-color:#D9C4A2}
+  html[data-theme="light"] .step{border-left-color:var(--gold)}
+  html[data-theme="light"] .card{border-top-color:rgba(202,138,4,.9)}
+  html[data-theme="light"] .btn.secondary{background:rgba(202,138,4,.12)}
+  html[data-theme="light"] .btn.secondary:hover{background:rgba(202,138,4,.2)}
+  html[data-theme="light"] .thm{background:rgba(202,138,4,.14)}
 </style>
 </head>
 <body>
@@ -187,6 +225,7 @@
       <a href="#howto">指引</a>
       <a href="#faq">问答</a>
     </nav>
+    <button class="thm" id="thm" type="button">浅色版</button>
   </div>
 </header>
 
@@ -253,7 +292,7 @@
   <div class="eyebrow"><span class="la">Chapter III</span><span class="cn">现场演示</span></div>
   <h2>三十秒 <span class="hl">看明白</span></h2>
   <div class="vidwrap">
-    <video src="docs/demo.mp4" controls playsinline preload="metadata" poster="docs/p03-home.jpg"></video>
+    <video src="docs/demo.mp4" controls playsinline preload="metadata" poster="docs/demo-poster.jpg"></video>
   </div>
 </section>
 
@@ -310,8 +349,7 @@
     <a href="README.md">仓库说明</a>
     <a href="LICENSE">开源许可</a>
   </div>
-  © 2026 OriPet · 演示素材为虚拟形象，请勿商用或外传<br>
-  本展示页由 GitHub Pages 托管 · QuestUI 风格
+  © 2026 OriPet · 演示素材为虚拟形象，请勿商用或外传
 </footer>
 
 <a class="dlbar" href="dist/oripet-public-demo-v1.0.0.apk" download>免费下载 · 把她带到桌面</a>
@@ -322,6 +360,17 @@
     var show=false;
     function on(){ show = window.scrollY > 260; bar.classList.toggle('show', show); }
     addEventListener('scroll', on, {passive:true}); on();
+    var thm=document.getElementById('thm'), root=document.documentElement;
+    if(thm){
+      if(localStorage.getItem('oripet-theme')==='light') root.dataset.theme='light';
+      function paint(){ thm.textContent = root.dataset.theme==='light' ? '深色版' : '浅色版'; }
+      thm.addEventListener('click', function(){
+        root.dataset.theme = root.dataset.theme==='light' ? '' : 'light';
+        localStorage.setItem('oripet-theme', root.dataset.theme==='light' ? 'light' : 'dark');
+        paint();
+      });
+      paint();
+    }
   })();
 </script>
 
