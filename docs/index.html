@@ -114,6 +114,7 @@
     background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.9}
   .phone img{display:block;width:100%;border-radius:var(--rad-md);border:1px solid #120a06}
   .phone figcaption{text-align:center;font-size:12px;letter-spacing:.02em;color:var(--paper-dim);padding:10px 0 6px}
+  @media (min-width:860px){ .phone:last-child:nth-child(7){grid-column:2} }
 
   /* features */
   .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
@@ -271,6 +272,10 @@
     <figure class="phone">
       <img src="p06-partner.jpg" alt="OriPet 伙伴互动页" loading="lazy">
       <figcaption>伙伴互动</figcaption>
+    </figure>
+    <figure class="phone">
+      <img src="p07-desktop.jpg" alt="OriPet 宠物悬浮在真实桌面" loading="lazy">
+      <figcaption>真实桌面 · 悬浮陪伴</figcaption>
     </figure>
   </div>
 </section>
