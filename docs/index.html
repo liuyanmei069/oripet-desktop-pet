@@ -129,6 +129,12 @@
   .phone::before{content:"";position:absolute;top:0;left:12%;right:12%;height:2px;
     background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.9}
   .phone img{display:block;width:100%;border-radius:var(--rad-md);border:1px solid #120a06}
+  .phone video{display:block;width:100%;height:auto;border-radius:var(--rad-md);border:1px solid #120a06}
+  .herophone a{display:block;position:relative}
+  .herophone a::after{content:"▶ 完整演示";position:absolute;right:8px;bottom:8px;pointer-events:none;
+    font-family:Cinzel,"Noto Serif SC",serif;font-size:11px;letter-spacing:.02em;color:#1A0F0A;
+    background:linear-gradient(180deg,#DAA520,#B8780A);border:1px solid #EAC569;border-radius:3px;
+    padding:4px 10px;opacity:.95;box-shadow:0 2px 8px rgba(0,0,0,.35)}
   .phone figcaption{text-align:center;font-size:12px;letter-spacing:.02em;color:var(--paper-dim);padding:10px 0 6px}
 
   /* features */
@@ -242,6 +248,7 @@
   html[data-theme="light"] .btn.secondary:hover{background:rgba(202,138,4,.2)}
   html[data-theme="light"] .thm{background:rgba(202,138,4,.14)}
 </style>
+<script>try{if(localStorage.getItem('oripet-theme')!=='dark')document.documentElement.dataset.theme='light'}catch(e){}</script>
 </head>
 <body>
 
@@ -274,8 +281,11 @@
   <div class="note">首次安装如提示<b>「未知来源」→ 允许即可</b> · 仅申请悬浮窗权限，不读取通讯录 / 相册 / 定位</div>
   </div>
   <figure class="phone herophone">
-    <img src="p07-desktop.jpg" width="250" height="545" alt="OriPet 宠物真实悬浮在手机桌面">
-    <figcaption>真实桌面 · 悬浮陪伴</figcaption>
+    <a class="heroplay" href="#demo" aria-label="播放完整演示视频">
+      <video src="demo-clip.mp4" autoplay muted loop playsinline preload="metadata"
+        poster="demo-poster.jpg" width="250" height="500"></video>
+    </a>
+    <figcaption>现场直拍 · 点击看完整演示</figcaption>
   </figure>
 </div>
 
@@ -412,7 +422,6 @@
     addEventListener('scroll', on, {passive:true}); on();
     var thm=document.getElementById('thm'), root=document.documentElement;
     if(thm){
-      if(localStorage.getItem('oripet-theme')==='light') root.dataset.theme='light';
       function paint(){ thm.textContent = root.dataset.theme==='light' ? '深色版' : '浅色版'; }
       thm.addEventListener('click', function(){
         root.dataset.theme = root.dataset.theme==='light' ? '' : 'light';
