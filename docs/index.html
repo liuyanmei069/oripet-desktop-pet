@@ -280,10 +280,11 @@
       background:linear-gradient(180deg,rgba(202,138,4,.13),rgba(202,138,4,.04));
       border:1px solid rgba(202,138,4,.4);border-top:2px solid var(--gold);
       border-radius:var(--rad-md);padding:15px 15px 13px;box-shadow:var(--sh-sm)}
-    .cta{flex-direction:column;align-items:stretch;margin:0;gap:10px}
-    .cta .btn{width:100%;justify-content:center}
-    .cta .btn.primary{padding:14px 16px;font-size:15.5px}
-    .cta .btn.secondary{align-self:center;width:auto;padding:8px 22px;font-size:13px;
+    .cta{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center;margin:0;gap:10px}
+    .cta .btn{width:auto;justify-content:center}
+    .cta .btn.primary{padding:13px 22px;font-size:15px}
+    .cta .btn .x{display:none}
+    .cta .btn.secondary{padding:9px 18px;font-size:13.5px;
       background:rgba(202,138,4,.06);border:1px solid rgba(202,138,4,.38);box-shadow:none}
     .cta .btn.secondary:hover{background:rgba(202,138,4,.12);box-shadow:none}
     .hero-act .note{display:block;margin-top:11px;font-size:10.5px;line-height:1.65;
@@ -366,14 +367,14 @@
   </div>
   <div class="hero-act">
     <div class="cta">
-      <a class="btn primary" href="../dist/oripet-public-demo-v1.0.0.apk" download>免费下载 · 把她带到桌面</a>
+      <a class="btn primary" href="../dist/oripet-public-demo-v1.0.0.apk" download>免费下载<span class="x"> · 把她带到桌面</span></a>
       <a class="btn secondary" href="#demo">▶ 先看现场演示</a>
     </div>
     <div class="note">首次安装如提示<b>「未知来源」→ 允许即可</b> · 仅申请悬浮窗权限，不读取通讯录 / 相册 / 定位</div>
   </div>
   <figure class="phone herophone">
     <a class="heroplay" href="#demo" aria-label="播放完整演示视频">
-      <video src="demo-clip.mp4" autoplay muted loop playsinline preload="metadata"
+      <video src="demo-clip.mp4" autoplay muted loop playsinline webkit-playsinline preload="auto"
         poster="demo-poster.jpg" width="250" height="500"></video>
     </a>
     <figcaption>现场直拍 · 点击播放</figcaption>
@@ -574,6 +575,15 @@
         },{threshold:[0.6]});
         io.observe(dv);
       }
+    }
+    var hv=document.querySelector('.herophone video');
+    if(hv){
+      var tp=function(){ try{ var pr=hv.play(); if(pr&&pr.catch) pr.catch(function(){}); }catch(e){} };
+      hv.addEventListener('loadeddata',tp);
+      addEventListener('pointerdown',tp,{passive:true});
+      if('IntersectionObserver' in window){ new IntersectionObserver(function(es){
+        es.forEach(function(e){ if(e.isIntersecting) tp(); });
+      },{threshold:0.15}).observe(hv); }
     }
   })();
 </script>
