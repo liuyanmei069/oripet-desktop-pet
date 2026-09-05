@@ -107,12 +107,13 @@
   .badges b{color:var(--paper-deep);font-weight:600;font-family:Spectral,"Noto Serif SC",serif}
   .note{color:var(--paper-dim);font-size:12.5px;opacity:.82;margin-top:18px}
   .note b{color:var(--paper-deep);opacity:1}
-  .herophone{display:none;margin:0}
+  .phone.herophone{display:block;margin:26px auto 0;width:min(176px,52vw)}
+  .herophone figcaption{font-size:11px;padding:8px 0 2px}
   @media (min-width:1100px){
     .hero{display:flex;justify-content:space-between;align-items:center;text-align:left;
       gap:clamp(44px,5vw,76px);padding-block:clamp(56px,7vw,84px) 18px;padding-inline:22px}
     .hero-txt{flex:1 1 560px;max-width:620px}
-    .herophone{display:block;flex:0 0 auto;width:min(258px,30vw)}
+    .phone.herophone{display:block;flex:0 0 auto;width:min(252px,26vw);margin:0}
     .hero h1{font-size:clamp(30px,3.4vw,46px)}
     .hero .cta{justify-content:flex-start}
     .hero .badges{justify-content:flex-start}
@@ -120,17 +121,27 @@
     .hero .note{margin-left:0;margin-right:0}
   }
 
-  /* phone shots */
-  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .shots .phone{width:100%;max-width:340px;justify-self:center}
-  .shots .phone{padding:6px}
-  .shots .phone figcaption{font-size:11px;padding:7px 0 4px;letter-spacing:.02em}
-  @media (max-width:420px){ .shots{grid-template-columns:1fr} }
-  @media (min-width:660px){ .shots{grid-template-columns:repeat(3,1fr);gap:20px} }
+  @media (min-width:720px) and (max-width:1099px){ .phone.herophone{display:none} }
+
+  /* phone shots: mobile = swipeable rail; >=660 grid */
+  .shots{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin-inline:-22px;padding:4px 22px 16px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .shots::-webkit-scrollbar{display:none}
+  .shots .phone{flex:0 0 auto;width:min(58vw,208px);padding:6px;scroll-snap-align:center;box-shadow:var(--sh)}
+  .shots .phone:first-child{scroll-snap-align:start}
+  .shots .phone figcaption{font-size:11px;padding:7px 0 4px;white-space:nowrap}
+  .swipe{display:block;text-align:center;color:var(--paper-dim);font-size:11.5px;
+    letter-spacing:.05em;margin:6px 0 -28px}
+  @media (min-width:660px){
+    .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;overflow:visible;
+      margin-inline:0;padding:0;scroll-snap-type:none}
+    .shots .phone{width:100%;max-width:340px;justify-self:center;padding:9px 9px 6px;
+      scroll-snap-align:none}
+    .shots .phone figcaption{font-size:12px;padding:10px 0 6px;white-space:normal}
+    .swipe{display:none}
+  }
   @media (min-width:940px){
     .shots{grid-template-columns:repeat(4,1fr);gap:26px}
-    .shots .phone{padding:9px 9px 6px}
-    .shots .phone figcaption{font-size:12px;padding:10px 0 6px}
   }
   .phone{width:min(250px,74vw);border-radius:var(--rad-lg);position:relative;
     border:1px solid var(--line);background:linear-gradient(180deg,#2C1A10,#241307);
@@ -284,7 +295,7 @@
   <p>常驻屏幕上层，轻触有反馈、专属小动作、伙伴还会互动。打开其他应用时，她就在旁边陪你。</p>
   <div class="cta">
     <a class="btn primary" href="../dist/oripet-public-demo-v1.0.0.apk" download>免费下载 · 把她带到桌面</a>
-    <a class="btn secondary" href="#demo">▶ 先看 30 秒演示</a>
+    <a class="btn secondary" href="#demo">▶ 先看现场演示</a>
   </div>
   <div class="badges">
     <span>约 <b>15 MB</b></span><span><b>Android 8.0+</b></span><span>免费 · <b>无广告</b></span><span>无需 <b>注册</b></span>
@@ -334,6 +345,16 @@
       <figcaption>真实桌面 · 悬浮陪伴</figcaption>
     </figure>
   </div>
+  <div class="swipe">‹ 左右滑动 · 共 7 屏 ›</div>
+</section>
+
+<section id="demo" class="wrap">
+  <div class="eyebrow"><span class="la">Chapter III</span><span class="cn">现场演示</span></div>
+  <h2>全程实拍 · <span class="hl">46 秒</span> 看明白</h2>
+  <div class="sub">桌面悬浮真实录屏 · 含召唤、触摸、专属动作与伙伴互动 · 建议全屏播放</div>
+  <div class="vidwrap">
+    <video src="demo.mp4" controls playsinline preload="metadata" poster="demo-poster.jpg"></video>
+  </div>
 </section>
 
 <section id="feat" class="wrap">
@@ -346,14 +367,6 @@
     <div class="card"><div class="seal">伴</div><h3>伙伴联动</h3><p>绑定一位成员，两人结伴上桌，在线时头像亮起、彼此互动。</p></div>
     <div class="card"><div class="seal">记</div><h3>状态记忆</h3><p>关掉再开，她还记得你上次选的角色与状态，自动回到桌面。</p></div>
     <div class="card"><div class="seal">净</div><h3>干净省心</h3><p>无广告、无账号、无内购，卸载即走，不留后台残留。</p></div>
-  </div>
-</section>
-
-<section id="demo" class="wrap">
-  <div class="eyebrow"><span class="la">Chapter III</span><span class="cn">现场演示</span></div>
-  <h2>三十秒 <span class="hl">看明白</span></h2>
-  <div class="vidwrap">
-    <video src="demo.mp4" controls playsinline preload="metadata" poster="demo-poster.jpg"></video>
   </div>
 </section>
 
