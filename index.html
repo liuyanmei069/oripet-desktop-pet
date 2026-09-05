@@ -111,10 +111,15 @@
   .phone.herophone{display:block;margin:26px auto 0;width:min(176px,52vw)}
   .herophone figcaption{font-size:11px;padding:8px 0 2px}
   @media (min-width:1100px){
-    .hero{display:flex;justify-content:space-between;align-items:center;text-align:left;
-      gap:clamp(44px,5vw,76px);padding-block:clamp(56px,7vw,84px) 18px;padding-inline:22px}
-    .hero-txt{flex:1 1 560px;max-width:620px}
-    .phone.herophone{display:block;flex:0 0 auto;width:min(252px,26vw);margin:0}
+    .hero{display:grid;grid-template-columns:minmax(0,1fr) auto;
+      grid-template-areas:"txt phone" "act phone" "meta phone";
+      column-gap:clamp(44px,5vw,76px);align-items:center;text-align:left;
+      padding-block:clamp(56px,7vw,84px) 18px;padding-inline:22px}
+    .hero-txt{grid-area:txt;max-width:640px}
+    .hero-act{grid-area:act}
+    .hero-meta{grid-area:meta}
+    .phone.herophone{grid-area:phone;display:block;justify-self:end;align-self:center;
+      width:min(252px,26vw);margin:0}
     .hero h1{font-size:clamp(30px,3.4vw,46px)}
     .hero .cta{justify-content:flex-start}
     .hero .badges{justify-content:flex-start}
@@ -203,6 +208,7 @@
     background:linear-gradient(90deg,transparent,var(--gold),transparent);z-index:2}
   video{display:block;width:auto;max-width:100%;height:min(72vh,720px);
     aspect-ratio:720/1438;object-fit:cover;background:#000}
+  .vcap{text-align:center;color:var(--paper-dim);font-size:12px;letter-spacing:.02em;margin-top:12px}
 
   /* faq */
   details{background:linear-gradient(180deg,#2C1A10,#241307);border:1px solid var(--line);
@@ -253,17 +259,20 @@
   }
   @media (max-width:600px){ section{padding-top:clamp(48px,9vw,58px)} }
   @media (max-width:659px){
-    .hero{padding-top:clamp(34px,7vw,46px)}
-    .hero .tag{margin-bottom:18px}
-    .hero p{margin-top:14px}
-    .cta{flex-direction:column;align-items:stretch;margin:22px auto 12px;max-width:430px;gap:10px}
-    .cta .btn{width:100%;justify-content:center;padding:13px 16px}
-    .cta .btn.secondary{background:transparent;border:1px solid transparent;color:var(--gold-hi);
-      padding:7px 16px;box-shadow:none}
-    .cta .btn.secondary:hover{background:rgba(202,138,4,.08);box-shadow:none}
+    .hero{padding-top:clamp(30px,6vw,40px)}
+    .hero .tag{margin-bottom:16px}
+    .hero p{margin-top:12px}
+    .cta{flex-direction:column;align-items:stretch;margin:20px auto 4px;max-width:430px;gap:12px}
+    .cta .btn{width:100%;justify-content:center}
+    .cta .btn.primary{padding:15px 18px;font-size:16px}
+    .cta .btn.secondary{align-self:center;width:auto;min-width:0;
+      background:rgba(202,138,4,.06);border:1px solid rgba(202,138,4,.38);
+      padding:10px 24px;font-size:14px;box-shadow:none}
+    .cta .btn.secondary:hover{background:rgba(202,138,4,.12);box-shadow:none}
+    .phone.herophone{margin:14px auto 0}
+    .hero-meta{margin-top:14px}
     .badges{gap:12px;font-size:12px}
     .note{margin-top:12px;font-size:12px}
-    .phone.herophone{margin-top:16px}
     .endbox{flex-direction:column;align-items:stretch;gap:18px;padding:26px 20px}
     .endbox .btn{width:100%;justify-content:center;padding:15px 16px}
     details{padding:13px 16px}
@@ -330,17 +339,15 @@
 
 <div class="hero wrap">
   <div class="hero-txt">
-  <div class="tag">✦ Android · 桌面宠物 · V1.0.0</div>
-  <h1>把喜欢的 <em>Q 版偶像</em><br>放到手机桌面</h1>
-  <p>常驻屏幕上层，轻触有反馈、专属小动作、伙伴还会互动。打开其他应用时，她就在旁边陪你。</p>
-  <div class="cta">
-    <a class="btn primary" href="dist/oripet-public-demo-v1.0.0.apk" download>免费下载 · 把她带到桌面</a>
-    <a class="btn secondary" href="#demo">▶ 先看现场演示</a>
+    <div class="tag">✦ Android · 桌面宠物 · V1.0.0</div>
+    <h1>把喜欢的 <em>Q 版偶像</em><br>放到手机桌面</h1>
+    <p>常驻屏幕上层，轻触有反馈、专属小动作、伙伴还会互动。打开其他应用时，她就在旁边陪你。</p>
   </div>
-  <div class="badges">
-    <span>约 <b>15 MB</b></span><span><b>Android 8.0+</b></span><span>免费 · <b>无广告</b></span><span>无需 <b>注册</b></span>
-  </div>
-  <div class="note">首次安装如提示<b>「未知来源」→ 允许即可</b> · 仅申请悬浮窗权限，不读取通讯录 / 相册 / 定位</div>
+  <div class="hero-act">
+    <div class="cta">
+      <a class="btn primary" href="dist/oripet-public-demo-v1.0.0.apk" download>免费下载 · 把她带到桌面</a>
+      <a class="btn secondary" href="#demo">▶ 先看现场演示</a>
+    </div>
   </div>
   <figure class="phone herophone">
     <a class="heroplay" href="#demo" aria-label="播放完整演示视频">
@@ -349,6 +356,12 @@
     </a>
     <figcaption>现场直拍 · 点击看完整演示</figcaption>
   </figure>
+  <div class="hero-meta">
+    <div class="badges">
+      <span>约 <b>15 MB</b></span><span><b>Android 8.0+</b></span><span>免费 · <b>无广告</b></span><span>无需 <b>注册</b></span>
+    </div>
+    <div class="note">首次安装如提示<b>「未知来源」→ 允许即可</b> · 仅申请悬浮窗权限，不读取通讯录 / 相册 / 定位</div>
+  </div>
 </div>
 
 <section id="preview" class="wrap">
@@ -393,8 +406,10 @@
   <h2>全程实拍 · <span class="hl">46 秒</span> 看明白</h2>
   <div class="sub">桌面悬浮真实录屏 · 含召唤、触摸、专属动作与伙伴互动 · 建议全屏播放</div>
   <div class="vidwrap">
-    <video src="docs/demo.mp4" controls playsinline preload="metadata" poster="docs/demo-poster.jpg"></video>
+    <video id="demoV" src="docs/demo.mp4" controls playsinline preload="metadata" muted
+      poster="docs/demo-poster.jpg"></video>
   </div>
+  <div class="vcap">滚动到此处即自动静音试播前 8 秒 · 点击播放可观看完整 46 秒（含声音）</div>
 </section>
 
 <section id="feat" class="wrap">
@@ -509,6 +524,34 @@
       addEventListener('resize',shf);
       addEventListener('load',shf);
       shf();
+    }
+    var dv=document.getElementById('demoV');
+    if(dv){
+      var autoPlaying=false, teaserOver=false;
+      dv.addEventListener('timeupdate', function(){
+        if(autoPlaying && dv.currentTime>=7.9){ autoPlaying=false; teaserOver=true; dv.pause(); }
+      });
+      dv.addEventListener('play', function(){
+        if(autoPlaying) return;
+        if(teaserOver && dv.muted){ dv.muted=false; }
+      });
+      dv.addEventListener('pointerdown', function(){
+        if(autoPlaying){ autoPlaying=false; teaserOver=true; }
+        if(dv.muted){ dv.muted=false; }
+      });
+      if('IntersectionObserver' in window){
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(e){
+            if(e.isIntersecting){
+              if(!teaserOver && dv.paused && dv.currentTime<7.8){
+                autoPlaying=true; dv.muted=true;
+                var pr=dv.play(); if(pr&&pr.catch) pr.catch(function(){ autoPlaying=false; });
+              }
+            } else if(autoPlaying){ autoPlaying=false; dv.pause(); }
+          });
+        },{threshold:[0.6]});
+        io.observe(dv);
+      }
     }
   })();
 </script>
