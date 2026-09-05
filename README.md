@@ -33,6 +33,10 @@
 |---|---|---|
 | <img src="docs/p01-brand.jpg" width="240"/> | <img src="docs/p02-members.jpg" width="240"/> | <img src="docs/p05-profile.jpg" width="240"/> |
 
+| 真实桌面实拍 |
+|---|
+| <img src="docs/p07-desktop.jpg" width="240"/> |
+
 ### 操作演示
 
 <video src="docs/demo.mp4" controls="controls" muted="muted" style="max-height:560px;border-radius:8px;"></video>
